@@ -200,7 +200,7 @@
 
 <script>
     const totalQuestions = 15;
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZvXyiYrZRtyKKfEepGBtFBI5aRtcerdhRLnWiyLFcvR4mulFt_-pYut7u5k2q16S45A/exec"; 
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbh3NR4EMYL5YpfOmiDCVLgk4VCuj9itaA3I0b0k6tUAg6-RoX1h89RBNb3u1dmmPo/exec"; 
     
     const quizDatabase = {
         1: {
