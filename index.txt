@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ใบกิจกรรมที่ 2.4 ตรรกศาสตร์และขั้นตอนวิธี</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --bg-color: #f5f7fa;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* Student Info Form Style */
+        .student-info {
+            background: #eef2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #dcdde1;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #34495e;
+        }
+
+        .student-info input, .student-info select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Quiz Style */
+        .section {
+            margin-bottom: 35px;
+            padding: 20px;
+            border-left: 5px solid var(--primary-color);
+            background: #fafafa;
+            border-radius: 0 8px 8px 0;
+        }
+
+        ol li {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Input For Answers */
+        .quiz-input {
+            padding: 6px 10px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 130px;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .quiz-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+   
+    <h1>ใบกิจกรรมที่ 2.4 ตรรกศาสตร์และขั้นตอนวิธี</h1>
+    <p class="subtitle">กรอกข้อมูลส่วนตัวให้ครบถ้วนก่อนเริ่มทำกิจกรรม (คะแนนเต็ม 5 คะแนน)</p>
+
+    <div class="student-info">
+        <div class="form-grid">
+            <div class="form-group">
+                <label>เลขประจำตัวนักเรียน</label>
+                <input type="text" id="student_id" maxlength="5" placeholder="เช่น 12345" required>
+            </div>
+            <div class="form-group">
+                <label>คำนำหน้าชื่อ</label>
+                <select id="title" required>
+                    <option value="">-- เลือก --</option>
+                    <option value="นาย">นาย</option>
+                    <option value="นางสาว">นางสาว</option>
+                </select>
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+                <label>ชื่อ-นามสกุล</label>
+                <input type="text" id="fullname" placeholder="สมชาย ใจดี" required>
+            </div>
+            <div class="form-group">
+                <label>ตอน</label>
+                <select id="section_group" required>
+                    <option value="">-- เลือก --</option>
+                    <option value="ก">ก</option>
+                    <option value="ข">ข</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>ห้อง</label>
+                <input type="text" id="room" placeholder="เช่น 1" required>
+            </div>
+            <div class="form-group">
+                <label>เลขที่</label>
+                <input type="number" id="no" min="1" placeholder="เช่น 1" required>
+            </div>
+        </div>
+    </div>
+
+    <div id="quiz-container"></div>
+
+    <div class="btn-container">
+        <button onclick="submitQuiz()">ส่งคำตอบและเช็คคะแนนรวม</button>
+    </div>
+</div>
+
+<script>
+    const totalQuestions = 15;
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZvXyiYrZRtyKKfEepGBtFBI5aRtcerdhRLnWiyLFcvR4mulFt_-pYut7u5k2q16S45A/exec"; 
+    
+    const quizDatabase = {
+        1: {
+            part1: [
+                { q: 'เครื่องหมายเปรียบเทียบที่ใช้ตรวจสอบว่า "ค่าสองค่าไม่เท่ากัน" คือ', a: '!=' },
+                { q: 'ตัวเชื่อมตรรกศาสตร์ที่ผลลัพธ์จะเป็น True แค่กรณีเดียวคือ ต้องเป็นจริงทั้งหมด คือ', a: '&&' },
+                { q: 'ตัวเชื่อมตรรกศาสตร์ที่ทำหน้าที่ "กลับค่าความจริง" คือ', a: '!' },
+                { q: 'นิพจน์ <code style="background:#eee; padding:2px 6px;">(10 > 5)</code> จะให้ผลลัพธ์เป็นค่าความจริงคือ', a: 'True' },
+                { q: 'นิพจน์ <code style="background:#eee; padding:2px 6px;">(3 != 3)</code> จะให้ผลลัพธ์เป็นค่าความจริงคือ', a: 'False' }
+            ],
+            part2: [
+                { exp: '(5 > 2) && (3 < 7)', a: 'True' },
+                { exp: '(10 == 10) || (4 > 9)', a: 'True' },
+                { exp: '!(8 >= 8)', a: 'False' },
+                { exp: '(5 != 5) && (2 == 2)', a: 'False' },
+                { exp: '(12 < 20) || (7 != 7)', a: 'True' }
+            ],
+            part3: [
+                { text: '<strong>[แบบทางเลือก]</strong> กำหนดให้คะแนนสอบ <code style="background:#eee; padding:2px 6px;">score = 75</code><br>ขั้นตอนวิธี: <em>"ถ้า score มากกว่าหรือเท่ากับ 80 ให้พิมพ์คำว่า True ถ้าไม่ใช่ให้พิมพ์คำว่า False"</em><br>ผลลัพธ์ที่พิมพ์ออกมาคืออะไร?', a: 'False', p: 'True หรือ False' },
+                { text: '<strong>[แบบทางเลือก]</strong> กำหนดให้ <code style="background:#eee; padding:2px 6px;">age = 15</code> และ <code style="background:#eee; padding:2px 6px;">height = 150</code><br>ขั้นตอนวิธี: <em>"ถ้าอายุมากกว่า 12 <strong>และ</strong> ความสูงตั้งแต่ 140 ขึ้นไป ให้พิมพ์คำว่า True ถ้าไม่ใช่ให้พิมพ์ False"</em><br>ผลลัพธ์ที่พิมพ์ออกมาคืออะไร?', a: 'True', p: 'True หรือ False' },
+                { text: '<strong>[แบบทำซ้ำ]</strong> กำหนดให้ <code style="background:#eee; padding:2px 6px;">count = 1</code><br>ขั้นตอนวิธี: <em>"ในขณะที่ count น้อยกว่าหรือเท่ากับ 3 ให้เพิ่มค่า count ขึ้นทีละ 1 แล้ววนกลับไปตรวจสอบใหม่"</em><br>เมื่อหลุดออกจากลูปทำซ้ำ ค่าของ <code style="background:#eee; padding:2px 6px;">count</code> สุดท้ายจะมีค่าเท่ากับเลขใด?', a: '4', p: 'กรอกตัวเลข' },
+                { text: '<strong>[แบบทำซ้ำ]</strong> กำหนดให้ <code style="background:#eee; padding:2px 6px;">sum = 0</code> และเริ่มต้นวนลูปโดยให้ตัวแปร <code style="background:#eee; padding:2px 6px;">i</code> มีค่าตั้งแต่ 1 ถึง 3<br>ขั้นตอนวิธี: <em>"ในแต่ละรอบ ให้นำค่า i ไปบวกสะสมไว้ใน sum (รอบที่ 1 บวกด้วย 1, รอบที่ 2 บวกด้วย 2, รอบที่ 3 บวกด้วย 3)"</em><br>เมื่อสิ้นสุดการทำงาน ผลลัพธ์สุดท้ายในตัวแปร <code style="background:#eee; padding:2px 6px;">sum</code> จะมีค่าเท่ากับเลขใด?', a: '6', p: 'กรอกตัวเลข' },
+                { text: '<strong>[แบบทำซ้ำ + ทางเลือก]</strong> กำหนดให้ตรวจสอบตัวเลขตั้งแต่ 1 ถึง 5<br>ขั้นตอนวิธี: <em>"วนลูปตรวจสอบทีละเลข ถ้าเลขนั้นหารด้วย 2 ลงตัว (เป็นเลขคู่) ให้สะสมนับจำนวนไว้"</em><br>เมื่อตรวจสอบครบถึงเลข 5 จำนวนเลขคู่ที่นับได้ทั้งหมดมีกี่จำนวน?', a: '2', p: 'กรอกตัวเลข' }
+            ]
+        },
+        2: {
+            part1: [
+                { q: 'เครื่องหมายเปรียบเทียบที่ใช้ตรวจสอบว่า "ค่าทางซ้ายเท่ากับค่าทางขวา" คือ', a: '==' },
+                { q: 'ตัวเชื่อมตรรกศาสตร์ที่ผลลัพธ์จะเป็น False แค่กรณีเดียวคือ ต้องเป็นเท็จทั้งหมด คือ', a: '||' },
+                { q: 'สัญลักษณ์ในระบบตรรกะคอมพิวเตอร์ที่แทนตัวเชื่อม "และ" คือ', a: '&&' },
+                { q: 'นิพจน์ <code style="background:#eee; padding:2px 6px;">(15 <= 15)</code> จะให้ผลลัพธ์เป็นค่าความจริงคือ', a: 'True' },
+                { q: 'นิพจน์ <code style="background:#eee; padding:2px 6px;">(7 > 12)</code> จะให้ผลลัพธ์เป็นค่าความจริงคือ', a: 'False' }
+            ],
+            part2: [
+                { exp: '(4 < 9) && (10 != 5)', a: 'True' },
+                { exp: '(3 > 8) || (6 == 6)', a: 'True' },
+                { exp: '!(5 < 2)', a: 'True' },
+                { exp: '(9 == 9) && (4 > 7)', a: 'False' },
+                { exp: '(2 != 2) || (8 < 3)', a: 'False' }
+            ],
+            part3: [
+                { text: '<strong>[แบบทางเลือก]</strong> กำหนดให้ราคาสินค้า <code style="background:#eee; padding:2px 6px;">price = 450</code><br>ขั้นตอนวิธี: <em>"ถ้า price มากกว่า 500 ให้พิมพ์คำว่า True ถ้าไม่ใช่ให้พิมพ์คำว่า False"</em><br>ผลลัพธ์ที่พิมพ์ออกมาคืออะไร?', a: 'False', p: 'True หรือ False' },
+                { text: '<strong>[แบบทางเลือก]</strong> กำหนดให้ <code style="background:#eee; padding:2px 6px;">has_ticket = true</code> และ <code style="background:#eee; padding:2px 6px;">is_member = false</code><br>ขั้นตอนวิธี: <em>"ถ้ามีตั๋ว (has_ticket) <strong>หรือ</strong> เป็นสมาชิก (is_member) ให้พิมพ์คำว่า True ถ้าไม่ใช่ให้พิมพ์ False"</em><br>ผลลัพธ์ที่พิมพ์ออกมาคืออะไร?', a: 'True', p: 'True หรือ False' },
+                { text: '<strong>[แบบทำซ้ำ]</strong> กำหนดให้ตัวแปร <code style="background:#eee; padding:2px 6px;">num = 5</code><br>ขั้นตอนวิธี: <em>"ในขณะที่ num มากกว่า 2 ให้ลดค่า num ลงทีละ 1 แล้ววนลูปใหม่"</em><br>เมื่อเงื่อนไขเป็นเท็จและหลุดลูป ค่าของ <code style="background:#eee; padding:2px 6px;">num</code> สุดท้ายเป็นเท่าใด?', a: '2', p: 'กรอกตัวเลข' },
+                { text: '<strong>[แบบทำซ้ำ]</strong> กำหนดให้ <code style="background:#eee; padding:2px 6px;">total = 1</code> และตัวแปร <code style="background:#eee; padding:2px 6px;">x</code> มีค่าวนลูปตั้งแต่ 1 ถึง 3<br>ขั้นตอนวิธี: <em>"ในแต่ละรอบ ให้นำค่า x ไปคูณสะสมไว้ใน total (รอบแรกคูณ 1, รอบสองคูณ 2, รอบสามคูณ 3)"</em><br>เมื่อจบขั้นตอน ผลลัพธ์ใน <code style="background:#eee; padding:2px 6px;">total</code> จะมีค่าเท่าใด?', a: '6', p: 'กรอกตัวเลข' },
+                { text: '<strong>[แบบทำซ้ำ + ทางเลือก]</strong> กำหนดให้ตรวจสอบตัวเลขตั้งแต่ 1 ถึง 10<br>ขั้นตอนวิธี: <em>"วนลูปตรวจสอบทีละเลข ถ้าเลขนั้นหารด้วย 5 ลงตัว ให้สะสมนับจำนวนไว้"</em><br>เมื่อทำงานเสร็จสิ้น จำนวนที่นับได้มีทั้งหมดกี่จำนวน?', a: '2', p: 'กรอกตัวเลข' }
+            ]
+        },
+        3: {
+            part1: [
+                { q: 'สัญลักษณ์ตรรกศาสตร์ที่ใช้แทนตัวเชื่อม "หรือ" ในทางคอมพิวเตอร์คือ', a: '||' },
+                { q: 'เครื่องหมายเปรียบเทียบที่หมายถึง "มากกว่าหรือเท่ากับ" คือ', a: '>=' },
+                { q: 'ถ้ากำหนดให้นิพจน์ A เป็น True ผลลัพธ์ของนิพจน์ <code style="background:#eee; padding:2px 6px;">!A</code> คือ', a: 'False' },
+                { q: 'นิพจน์ <code style="background:#eee; padding:2px 6px;">(20 == 20)</code> จะให้ผลลัพธ์เป็นค่าความจริงคือ', a: 'True' },
+                { q: 'นิพจน์ <code style="background:#eee; padding:2px 6px;">(5 > 5)</code> จะให้ผลลัพธ์เป็นค่าความจริงคือ', a: 'False' }
+            ],
+            part2: [
+                { exp: '(12 >= 12) && (3 == 3)', a: 'True' },
+                { exp: '(4 != 4) || (5 > 1)', a: 'True' },
+                { exp: '!(10 == 10)', a: 'False' },
+                { exp: '(7 < 2) && (9 != 1)', a: 'False' },
+                { exp: '(6 > 9) || (3 >= 5)', a: 'False' }
+            ],
+            part3: [
+                { text: '<strong>[แบบทางเลือก]</strong> กำหนดให้เวลาทำงาน <code style="background:#eee; padding:2px 6px;">hours = 9</code><br>ขั้นตอนวิธี: <em>"ถ้า hours เกิน 8 ชั่วโมง ให้พิมพ์คำว่า True ถ้าไม่ใช่ให้พิมพ์คำว่า False"</em><br>ผลลัพธ์ที่พิมพ์ออกมาคืออะไร?', a: 'True', p: 'True หรือ False' },
+                { text: '<strong>[แบบทางเลือก]</strong> กำหนดให้ค่าความจริงตัวแปรเป็น <code style="background:#eee; padding:2px 6px;">A = False</code> และ <code style="background:#eee; padding:2px 6px;">B = True</code><br>ขั้นตอนวิธี: <em>"ถ้า A เป็นจริง <strong>และ</strong> B เป็นจริง ให้พิมพ์ True ถ้าไม่ใช่ให้พิมพ์ False"</em><br>ผลลัพธ์ที่พิมพ์ออกมาคืออะไร?', a: 'False', p: 'True หรือ False' },
+                { text: '<strong>[แบบทำซ้ำ]</strong> กำหนดให้ <code style="background:#eee; padding:2px 6px;">index = 0</code><br>ขั้นตอนวิธี: <em>"ในขณะที่ index น้อยกว่า 4 ให้เพิ่มค่า index ขึ้นรอบละ 1 แล้ววนซ้ำ"</em><br>เมื่อลูปสิ้นสุด ค่าของ <code style="background:#eee; padding:2px 6px;">index</code> จะมีค่าเท่ากับเลขใด?', a: '4', p: 'กรอกตัวเลข' },
+                { text: '<strong>[แบบทำซ้ำ]</strong> กำหนดให้ <code style="background:#eee; padding:2px 6px;">result = 10</code> และทำการวนลูป 3 รอบ<br>ขั้นตอนวิธี: <em>"ในแต่ละรอบ ให้ลดค่า result ลงทีละ 2"</em><br>เมื่อทำงานครบ 3 รอบ ค่าสุดท้ายของ <code style="background:#eee; padding:2px 6px;">result</code> คือเลขใด?', a: '4', p: 'กรอกตัวเลข' },
+                { text: '<strong>[แบบทำซ้ำ + ทางเลือก]</strong> กำหนดให้ตรวจสอบกลุ่มตัวเลข [3, 6, 9, 12, 15]<br>ขั้นตอนวิธี: <em>"วนลูปตรวจสอบทีละเลข หากเลขใดเป็นเลขคู่ ให้สะสมนับจำนวนไว้"</em><br>เมื่อจบลูป มีตัวเลขที่ตรงเงื่อนไขกี่จำนวน?', a: '2', p: 'กรอกตัวเลข' }
+            ]
+        },
+        4: {
+            part1: [
+                { q: 'สัญลักษณ์ที่ใช้กลับค่าความจริงในนิพจน์ตรรกศาสตร์คือ', a: '!' },
+                { q: 'เครื่องหมายเปรียบเทียบที่ใช้แทนคำว่า "น้อยกว่าหรือเท่ากับ" คือ', a: '<=' },
+                { q: 'ตัวเชื่อมตรรกศาสตร์ที่จะให้ผลลัพธ์เป็นเท็จ (False) หากตัวแปรทั้งสองฝั่งขัดแย้งกัน (True และ False) คือ', a: '&&' },
+                { q: 'นิพจน์ <code style="background:#eee; padding:2px 6px;">(8 != 9)</code> จะให้ผลลัพธ์เป็นค่าความจริงคือ', a: 'True' },
+                { q: 'นิพจน์ <code style="background:#eee; padding:2px 6px;">(4 >= 6)</code> จะให้ผลลัพธ์เป็นค่าความจริงคือ', a: 'False' }
+            ],
+            part2: [
+                { exp: '(3 < 5) && (8 == 8)', a: 'True' },
+                { exp: '(10 != 10) || (2 < 7)', a: 'True' },
+                { exp: '!(4 > 10)', a: 'True' },
+                { exp: '(5 >= 6) && (3 == 3)', a: 'False' },
+                { exp: '(1 != 1) || (7 < 4)', a: 'False' }
+            ],
+            part3: [
+                { text: '<strong>[แบบทางเลือก]</strong> กำหนดให้ระดับอุณหภูมิ <code style="background:#eee; padding:2px 6px;">temp = 38</code><br>ขั้นตอนวิธี: <em>"ถ้า temp สูงกว่า 37.5 ให้พิมพ์คำว่า True ถ้าไม่ใช่ให้พิมพ์คำว่า False"</em><br>ผลลัพธ์ที่พิมพ์ออกมาคืออะไร?', a: 'True', p: 'True หรือ False' },
+                { text: '<strong>[แบบทางเลือก]</strong> กำหนดให้ <code style="background:#eee; padding:2px 6px;">score1 = 45</code> และ <code style="background:#eee; padding:2px 6px;">score2 = 55</code><br>ขั้นตอนวิธี: <em>"ถ้า score1 ผ่านเกณฑ์ (ตั้งแต่ 50 ขึ้นไป) <strong>หรือ</strong> score2 ผ่านเกณฑ์ ให้พิมพ์ True ถ้าไม่ผ่านทั้งคู่พิมพ์ False"</em><br>ผลลัพธ์ที่พิมพ์ออกมาคืออะไร?', a: 'True', p: 'True หรือ False' },
+                { text: '<strong>[แบบทำซ้ำ]</strong> กำหนดให้ <code style="background:#eee; padding:2px 6px;">i = 10</code><br>ขั้นตอนวิธี: <em>"ในขณะที่ i มากกว่าหรือเท่ากับ 8 ให้ลดค่า i ลงทีละ 1 แล้วทำงานซ้ำ"</em><br>เมื่อเงื่อนไขกลายเป็นเท็จ ค่าสุดท้ายของ <code style="background:#eee; padding:2px 6px;">i</code> คือเลขใด?', a: '7', p: 'กรอกตัวเลข' },
+                { text: '<strong>[แบบทำซ้ำ]</strong> กำหนดให้ตัวแปรสะสมค่า <code style="background:#eee; padding:2px 6px;">sum = 10</code> และมีลูปวิ่งตัวแปร <code style="background:#eee; padding:2px 6px;">k</code> ตั้งแต่ 1 ถึง 2<br>ขั้นตอนวิธี: <em>"ในแต่ละรอบ ให้นำค่า k ไปบวกเพิ่มใน sum"</em><br>เมื่อทำงานเสร็จสิ้น ค่าสุดท้ายในตัวแปร <code style="background:#eee; padding:2px 6px;">sum</code> คือเลขใด?', a: '13', p: 'กรอกตัวเลข' },
+                { text: '<strong>[แบบทำซ้ำ + ทางเลือก]</strong> กำหนดให้ตรวจสอบเลขตั้งแต่ 1 ถึง 6<br>ขั้นตอนวิธี: <em>"วนลูปตรวจสอบทีละเลข ถ้าเลขนั้นหารด้วย 3 ลงตัว ให้สะสมนับจำนวนไว้"</em><br>เมื่อวนลูปจนเสร็จสิ้น มีจำนวนตัวเลขที่ตรงเงื่อนไขกี่จำนวน?', a: '2', p: 'กรอกตัวเลข' }
+            ]
+        },
+        5: {
+            part1: [
+                { q: 'ในตรรกศาสตร์คอมพิวเตอร์ ค่าความจริงที่หมายถึง "จริง" คือคำว่า', a: 'True' },
+                { q: 'ในตรรกศาสตร์คอมพิวเตอร์ ค่าความจริงที่หมายถึง "เท็จ" คือคำว่า', a: 'False' },
+                { q: 'เครื่องหมายที่ระบุว่า "ค่าทางซ้ายมีค่าน้อยกว่าค่าทางขวา" คือ', a: '<' },
+                { q: 'นิพจน์ <code style="background:#eee; padding:2px 6px;">(14 >= 10)</code> จะให้ผลลัพธ์เป็นค่าความจริงคือ', a: 'True' },
+                { q: 'นิพจน์ <code style="background:#eee; padding:2px 6px;">(9 == 6)</code> จะให้ผลลัพธ์เป็นค่าความจริงคือ', a: 'False' }
+            ],
+            part2: [
+                { exp: '(7 == 7) && (5 > 3)', a: 'True' },
+                { exp: '(12 < 4) || (8 != 2)', a: 'True' },
+                { exp: '!(3 >= 9)', a: 'True' },
+                { exp: '(4 != 4) && (10 == 10)', a: 'False' },
+                { exp: '(5 < 2) || (6 == 9)', a: 'False' }
+            ],
+            part3: [
+                { text: '<strong>[แบบทางเลือก]</strong> กำหนดให้ยอดซื้อสินค้า <code style="background:#eee; padding:2px 6px;">total = 1200</code><br>ขั้นตอนวิธี: <em>"หากยอดซื้อสินค้า (total) ตั้งแต่ 1000 ขึ้นไป ให้พิมพ์คำว่า True ถ้าไม่ใช่ให้พิมพ์คำว่า False"</em><br>ผลลัพธ์ที่พิมพ์ออกมาคืออะไร?', a: 'True', p: 'True หรือ False' },
+                { text: '<strong>[แบบทางเลือก]</strong> กำหนดให้สถานะ <code style="background:#eee; padding:2px 6px;">is_weekend = false</code> และ <code style="background:#eee; padding:2px 6px;">is_holiday = false</code><br>ขั้นตอนวิธี: <em>"ถ้าเป็นวันหยุดสุดสัปดาห์ <strong>หรือ</strong> เป็นวันหยุดนักขัตฤกษ์ ให้พิมพ์ True ถ้าไม่ใช่พิมพ์ False"</em><br>ผลลัพธ์ที่พิมพ์ออกมาคืออะไร?', a: 'False', p: 'True หรือ False' },
+                { text: '<strong>[แบบทำซ้ำ]</strong> กำหนดเริ่มต้นให้ตัวแปร <code style="background:#eee; padding:2px 6px;">loop_cnt = 1</code><br>ขั้นตอนวิธี: <em>"ในขณะที่ loop_cnt น้อยกว่า 4 ให้ทำการคูณค่า loop_cnt ด้วย 2 แล้ววนกลับมาเช็คเงื่อนไข"</em><br>เมื่อเงื่อนไขลูปกลายเป็นเท็จ ค่าสุดท้ายของ <code style="background:#eee; padding:2px 6px;">loop_cnt</code> จะเป็นเท่าใด?', a: '4', p: 'กรอกตัวเลข' },
+                { text: '<strong>[แบบทำซ้ำ]</strong> กำหนดให้ตัวแปร <code style="background:#eee; padding:2px 6px;">score_sum = 0</code> และทำการวนลูปเพื่อบวกเพิ่มค่าทีละ 5 จำนวน 3 รอบ<br>ขั้นตอนวิธี: <em>"ในแต่ละรอบ ให้นำ 5 ไปบวกสะสมไว้ในตัวแปร score_sum"</em><br>เมื่อเสร็จสิ้นการวนซ้ำ ตัวแปร <code style="background:#eee; padding:2px 6px;">score_sum</code> มีค่าสุดท้ายเท่าใด?', a: '15', p: 'กรอกตัวเลข' },
+                { text: '<strong>[แบบทำซ้ำ + ทางเลือก]</strong> กำหนดโครงสร้างลูปตรวจสอบตัวเลขตั้งแต่วันที่ 1 ถึง 7<br>ขั้นตอนวิธี: <em>"ในแต่ละรอบถ้าค่าของวันเป็นเลขที่มากกว่า 5 ให้สะสมนับจำนวนวันไว้"</em><br>เมื่อตรวจสอบครบแล้ว จำนวนวันที่นับได้มีทั้งหมดกี่วัน?', a: '2', p: 'กรอกตัวเลข' }
+            ]
+        }
+    };
+
+    let selectedSet = 1; 
+
+    function generateQuiz() {
+        selectedSet = Math.floor(Math.random() * 5) + 1;
+        const set = quizDatabase[selectedSet];
+        let quizHTML = '';
+
+        // ตอนที่ 1
+        quizHTML += `
+        <div class="section">
+            <h3>ตอนที่ 1: เติมคำในช่องว่าง (ทฤษฎีและสัญลักษณ์)</h3>
+            <p style="font-style: italic; color: #666;">คำชี้แจง: นำตัวเลือกที่กำหนดให้เติมลงในช่องว่างให้ถูกต้อง (ตัวเลือก: <b>&&, ||, !, True, False, ==, !=, &gt;, &lt;, &gt;=, &lt;=</b>)</p>
+            <ol>`;
+        set.part1.forEach((item, index) => {
+            const qNum = index + 1;
+            quizHTML += `
+                <li>${item.q} 
+                    <input type="text" id="q${qNum}" class="quiz-input" data-answer="${item.a}">
+                </li>`;
+        });
+        quizHTML += `</ol></div>`;
+
+        // ตอนที่ 2
+        quizHTML += `
+        <div class="section">
+            <h3>ตอนที่ 2: หาผลลัพธ์สุดท้ายของนิพจน์</h3>
+            <p style="font-style: italic; color: #666;">คำชี้แจง: จงคำนวณและเติมผลลัพธ์สุดท้ายว่าเป็น <b>True</b> หรือ <b>False</b></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="10%" class="text-center">ข้อที่</th>
+                        <th width="50%">นิพจน์ตรรกศาสตร์</th>
+                        <th width="40%" class="text-center">กรอกคำตอบ (True / False)</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+        set.part2.forEach((item, index) => {
+            const qNum = index + 6;
+            quizHTML += `
+                <tr>
+                    <td class="text-center">${index + 1}</td>
+                    <td><code>${item.exp}</code></td>
+                    <td class="text-center">
+                        <input type="text" id="q${qNum}" class="quiz-input" data-answer="${item.a}">
+                    </td>
+                </tr>`;
+        });
+        quizHTML += `</tbody></table></div>`;
+
+        // ตอนที่ 3
+        quizHTML += `
+        <div class="section">
+            <h3>ตอนที่ 3: ขั้นตอนวิธีแบบบรรยาย (แบบทางเลือก และ แบบทำซ้ำ)</h3>
+            <p style="font-style: italic; color: #666;">คำชี้แจง: วิเคราะห์ขั้นตอนวิธีแบบบรรยายต่อไปนี้ แล้วตอบว่าพิมพ์ผลลัพธ์สุดท้ายเป็นตัวเลขอะไร หรือเงื่อนไขเป็น True หรือ False</p>
+            <ol>`;
+        set.part3.forEach((item, index) => {
+            const qNum = index + 11;
+            quizHTML += `
+                <li>
+                    ${item.text}<br>
+                    <input type="text" id="q${qNum}" class="quiz-input" placeholder="${item.p}" data-answer="${item.a}">
+                </li>`;
+        });
+        quizHTML += `</ol></div>`;
+
+        document.getElementById('quiz-container').innerHTML = quizHTML;
+    }
+
+    function submitQuiz() {
+        const studentId = document.getElementById('student_id').value.trim();
+        const title = document.getElementById('title').value;
+        const fullname = document.getElementById('fullname').value.trim();
+        const sectionGroup = document.getElementById('section_group').value;
+        const room = document.getElementById('room').value.trim();
+        const no = document.getElementById('no').value.trim();
+
+        if (!studentId || studentId.length !== 5 || !title || !fullname || !sectionGroup || !room || !no) {
+            alert("⚠️ กรุณากรอกข้อมูลนักเรียนให้ครบถ้วน และเลขประจำตัวต้องมี 5 หลักครับ!");
+            return;
+        }
+
+        let totalScore = 0;
+        let answeredCount = 0;
+
+        for (let i = 1; i <= totalQuestions; i++) {
+            const inputField = document.getElementById('q' + i);
+            if(inputField) {
+                const userAnswer = inputField.value.trim().toLowerCase();
+                const correctAnswer = inputField.getAttribute('data-answer').toLowerCase();
+
+                if (userAnswer !== "") {
+                    answeredCount++;
+                    if (userAnswer === correctAnswer) {
+                        totalScore++;
+                    }
+                }
+            }
+        }
+
+        if (answeredCount < totalQuestions) {
+            alert(`⚠️ กรุณาตอบคำถามให้ครบทั้ง ${totalQuestions} ข้อก่อนกดส่งครับ!`);
+            return;
+        }
+
+        // [แก้ไขคำนวณ] แปลงจากคะแนนดิบ 15 ข้อ ให้ทอนเป็นเต็ม 5 คะแนนโดยการหาร 3 ปัดเศษทศนิยม 2 ตำแหน่ง
+        const finalScore5 = Number((totalScore / 3).toFixed(2));
+
+        const submitBtn = document.querySelector('.btn-container button');
+        submitBtn.innerText = "กำลังบันทึกข้อมูล...";
+        submitBtn.disabled = true;
+
+        const payload = {
+            student_id: studentId,
+            title: title,
+            fullname: fullname,
+            section_group: sectionGroup,
+            room: room,
+            no: no,
+            score: finalScore5, // ส่งคะแนนสุทธิ (เต็ม 5) ไปเก็บที่ชีต
+            quiz_set: selectedSet
+        };
+
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors", 
+            cache: "no-cache",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        })
+        .then(() => {
+            alert(`🎉 บันทึกข้อมูลลง Google Sheet สำเร็จ!\n\nผู้ส่ง: ${title}${fullname}\nทำถูกทั้งหมด: ${totalScore} จาก 15 ข้อดิบ\nคิดเป็นคะแนนสุทธิสุทธิ์: ${finalScore5} / 5 คะแนน`);
+            
+            submitBtn.innerText = "ส่งคำตอบและเช็คคะแนนรวม";
+            submitBtn.disabled = false;
+        })
+        .catch(error => {
+            alert("เกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล กรุณาลองใหม่อีกครั้ง");
+            console.error("Error:", error);
+            submitBtn.innerText = "ส่งคำตอบและเช็คคะแนนรวม";
+            submitBtn.disabled = false;
+        });
+    }
+
+    window.onload = generateQuiz;
+</script>
+</body>
+</html>
